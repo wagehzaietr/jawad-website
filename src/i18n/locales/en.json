@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Luxury Fragrances",
+    "subtitle": "Crafted with Elegance",
+    "description": "Discover our exclusive collection of handcrafted perfumes, where artistry meets sophistication in every bottle.",
+    "cta": "Explore the Collection"
+  },
+  "products": {
+    "title": "Best Selling Perfumes",
+    "description": "Choose your category below to explore our finest scents.",
+    "categories": {
+      "all": "All",
+      "men": "Men",
+      "women": "Women"
+    },
+    "quickView": "Quick View",
+    "contact": "Contact",
+    "price": "Price",
+    "size": "Size",
+    "notes": {
+      "top": "Top Notes",
+      "heart": "Heart Notes",
+      "base": "Base Notes"
+    },
+    "freeShipping": "Free Shipping",
+    "freeShippingAr": "شحن مجاني"
+  },
+  "about": {
+    "title": "About Jawad Almahairy",
+    "description1": "For over 32 years, our journey in the world of perfumery began with great passion and infinite precision in selecting the finest ingredients. Over the years, this hobby has transformed into deep expertise that is translated into every drop of perfume we carefully craft.",
+    "description2": "M&J Almahairy was established to be an extension of this fragrant legacy, where we blend tradition with modernity, offering unique compositions that embody refined Arabic taste with a contemporary spirit.",
+    "description3": "We don't just sell perfumes; we tell stories that touch emotions and create unforgettable moments. Each fragrance we offer is the result of years of experience, deep understanding of fragrance notes, and the desire to provide the best for our customers.",
+    "quote": "Welcome to the world of M&J Almahairy, where expertise turns into art, and perfume becomes a lifestyle."
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "description": "Interested in our exclusive fragrances? Contact us for personalized assistance and inquiries.",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "location": "Location",
+    "messageBtn": "Message on WhatsApp"
+  }
+} 

@@ -1,0 +1,138 @@
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment } from 'react';
+import { FaWhatsapp, FaTimes, FaShippingFast } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
+import React from 'react';
+
+export default function ProductModal({ isOpen, onClose, product }) {
+  const { t } = useTranslation();
+
+  if (!product) {
+    return null;
+  }
+
+  const handleWhatsAppClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const message = encodeURIComponent(`Hi Jawad, I'm interested in ${product.name}`);
+    window.open(`https://wa.me/+97333445566?text=${message}`, '_blank');
+  };
+
+  const notes = product.notes || {};
+
+  return (
+    <Transition appear show={isOpen} as={Fragment}>
+      <Dialog as="div" className="relative z-50" onClose={onClose}>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-black/75" />
+        </Transition.Child>
+
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-black p-6 text-left align-middle shadow-xl transition-all border border-[#FFD700]">
+                <div className="absolute top-3 right-3">
+                  <button
+                    onClick={onClose}
+                    className="text-gray-400 hover:text-white transition-colors"
+                    aria-label="Close modal"
+                  >
+                    <FaTimes className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="relative aspect-square">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover rounded-lg cursor-pointer md:cursor-default"
+                      onClick={(e) => {
+                        if (window.innerWidth < 768) {
+                          e.preventDefault();
+                          onClose();
+                        }
+                      }}
+                    />
+                    <div className="absolute bottom-2 left-2 right-2 flex items-center justify-center py-1.5 px-3 bg-black/80 backdrop-blur-sm rounded-lg">
+                      <FaShippingFast className="w-4 h-4 text-[#FFD700] mr-2" />
+                      <span className="text-sm text-white">{t('products.freeShipping', 'Free Shipping')} - {t('products.freeShippingAr', 'شحن مجاني')}</span>
+                    </div>
+                  </div>
+
+                  <div className="overflow-y-auto max-h-[600px] pr-2">
+                    <h3 className="text-2xl font-serif text-[#FFD700] mb-2">{product.name}</h3>
+                    <p className="text-gray-400 mb-4">{product.description}</p>
+
+                    <div className="space-y-4 mb-6">
+                      <div className="space-y-3">
+                        <h4 className="text-lg font-semibold text-[#FFD700] border-b border-gray-800 pb-2">
+                          {t('products.notes.title', 'Fragrance Notes')}
+                        </h4>
+                        {notes.top && (
+                          <div>
+                            <h5 className="text-sm font-semibold text-[#FFD700]">{t('products.notes.top')}</h5>
+                            <p className="text-gray-400">{notes.top}</p>
+                          </div>
+                        )}
+                        {notes.heart && (
+                          <div>
+                            <h5 className="text-sm font-semibold text-[#FFD700]">{t('products.notes.heart')}</h5>
+                            <p className="text-gray-400">{notes.heart}</p>
+                          </div>
+                        )}
+                        {notes.base && (
+                          <div>
+                            <h5 className="text-sm font-semibold text-[#FFD700]">{t('products.notes.base')}</h5>
+                            <p className="text-gray-400">{notes.base}</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="border-t border-gray-800 pt-4 mt-4">
+                      <div className="flex justify-between items-center mb-4">
+                        <div>
+                          <p className="text-sm text-gray-400">{t('products.price')}</p>
+                          <p className="text-xl font-semibold text-white">${product.price}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-400">{t('products.size')}</p>
+                          <p className="text-xl font-semibold text-white">{product.size}</p>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={handleWhatsAppClick}
+                        className="w-full py-3 px-4 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg flex items-center justify-center space-x-2 hover:from-green-700 hover:to-green-800 transition-colors"
+                      >
+                        <FaWhatsapp size={20} />
+                        <span>{t('products.contact')}</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </div>
+      </Dialog>
+    </Transition>
+  );
+} 
