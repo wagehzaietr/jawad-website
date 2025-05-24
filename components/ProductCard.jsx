@@ -88,7 +88,7 @@ export default function ProductCard({ product }) {
                   <button
                     onClick={openModal}
                     className={`p-2 bg-white text-black rounded-full transition-all duration-300 hover:bg-[#FFD700]
-                      transform opacity-0 -translate-y-4
+                      transform opacity-0
                       ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 
                         'group-hover:opacity-100 group-hover:translate-y-0' : ''}`}
                     title={t('products.quickView')}
@@ -98,7 +98,7 @@ export default function ProductCard({ product }) {
                   <button
                     onClick={handleWhatsAppClick}
                     className={`p-2 bg-green-600 text-white rounded-full transition-all duration-300 hover:bg-green-700
-                      transform opacity-0 translate-y-4
+                      transform opacity-0 translate-y-4 hidden md:block
                       ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 
                         'group-hover:opacity-100 group-hover:translate-y-0' : ''}`}
                     title={t('products.contact')}
