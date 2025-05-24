@@ -1,18 +1,30 @@
 // src/App.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import ProductFilter from '../components/ProductFilter';
 import ProductCard from '../components/ProductCard';
-import About from '../components/About';
-import FAQ from '../components/FAQ';
-import Contact from '../components/Contact';
-import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
 import React from 'react';
 import './i18n/config';
 import { sampleProducts } from './data/products';
+
+// Lazy load components that are not immediately visible
+const About = lazy(() => import('../components/About'));
+const FAQ = lazy(() => import('../components/FAQ'));
+const Contact = lazy(() => import('../components/Contact'));
+const Footer = lazy(() => import('../components/Footer'));
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div className="w-full h-[200px] flex items-center justify-center">
+    <div className="relative w-20 h-20">
+      <div className="absolute inset-0 border-4 border-[#FFD700]/20 rounded-full"></div>
+      <div className="absolute inset-0 border-4 border-[#FFD700] rounded-full border-t-transparent animate-spin"></div>
+    </div>
+  </div>
+);
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -57,15 +69,21 @@ export default function App() {
             </div>
           </div>
         </section>
-        <section id="about">
-          <About />
-          <FAQ />
-        </section>
-        <section id="contact">
-          <Contact />
-        </section>
+        <Suspense fallback={<LoadingFallback />}>
+          <section id="about">
+            <About />
+            <FAQ />
+          </section>
+        </Suspense>
+        <Suspense fallback={<LoadingFallback />}>
+          <section id="contact">
+            <Contact />
+          </section>
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={<LoadingFallback />}>
+        <Footer />
+      </Suspense>
       <ScrollToTop />
     </div>
   );

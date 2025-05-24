@@ -2,10 +2,11 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { FaWhatsapp, FaTimes, FaShippingFast } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function ProductModal({ isOpen, onClose, product }) {
   const { t } = useTranslation();
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   if (!product) {
     return null;
@@ -59,17 +60,35 @@ export default function ProductModal({ isOpen, onClose, product }) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="relative aspect-square">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover rounded-lg cursor-pointer md:cursor-default"
-                      onClick={(e) => {
-                        if (window.innerWidth < 768) {
-                          e.preventDefault();
-                          onClose();
-                        }
-                      }}
-                    />
+                    <div className="w-full h-full">
+                      {/* Blur placeholder */}
+                      <div 
+                        className={`absolute inset-0 bg-gray-900 transition-opacity duration-300 ${
+                          imageLoaded ? 'opacity-0' : 'opacity-100'
+                        }`}
+                        style={{
+                          backgroundImage: `url(${product.image}?w=10)`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          filter: 'blur(10px)'
+                        }}
+                      />
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className={`w-full h-full object-cover rounded-lg cursor-pointer md:cursor-default transition-opacity duration-300 ${
+                          imageLoaded ? 'opacity-100' : 'opacity-0'
+                        }`}
+                        loading="lazy"
+                        onLoad={() => setImageLoaded(true)}
+                        onClick={(e) => {
+                          if (window.innerWidth < 768) {
+                            e.preventDefault();
+                            onClose();
+                          }
+                        }}
+                      />
+                    </div>
                     <div className="absolute bottom-2 left-2 right-2 flex items-center justify-center py-1.5 px-3 bg-black/80 backdrop-blur-sm rounded-lg">
                       <FaShippingFast className="w-4 h-4 text-[#FFD700] mr-2" />
                       <span className="text-sm text-white">{t('products.freeShipping', 'Free Shipping')} - {t('products.freeShippingAr', 'شحن مجاني')}</span>
@@ -110,7 +129,11 @@ export default function ProductModal({ isOpen, onClose, product }) {
                       <div className="flex justify-between items-center mb-4">
                         <div>
                           <p className="text-sm text-gray-400">{t('products.price')}</p>
-                          <p className="text-xl font-semibold text-white">${product.price}</p>
+                          <p className="text-xl font-semibold text-white">
+                            {product.price} <span className="text-[#FFD700]">AED</span>
+                            <span className="mx-2 text-sm text-gray-400">|</span>
+                            <span className="text-[#FFD700] text-sm">درهم اماراتي</span>
+                          </p>
                         </div>
                         <div>
                           <p className="text-sm text-gray-400">{t('products.size')}</p>

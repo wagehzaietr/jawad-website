@@ -1,5 +1,5 @@
 // src/components/ProductCard.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaWhatsapp, FaEye, FaShippingFast } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import ProductModal from './ProductModal';
@@ -8,6 +8,7 @@ import React from 'react';
 export default function ProductCard({ product }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTouchActive, setIsTouchActive] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { t } = useTranslation();
 
   const openModal = (e) => {
@@ -37,6 +38,10 @@ export default function ProductCard({ product }) {
     }, 300);
   };
 
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
   return (
     <>
       <div 
@@ -53,20 +58,39 @@ export default function ProductCard({ product }) {
               onClick={openModal}
             >
               <div className="relative w-full h-full transform transition-transform duration-700 group-hover:scale-110">
+                {/* Blur placeholder */}
+                <div 
+                  className={`absolute inset-0 bg-gray-900 transition-opacity duration-300 ${
+                    imageLoaded ? 'opacity-0' : 'opacity-100'
+                  }`}
+                  style={{
+                    backgroundImage: `url(${product.image}?w=10)`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    filter: 'blur(10px)'
+                  }}
+                />
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="h-full w-full object-cover object-center"
+                  className={`h-full w-full object-cover object-center transition-opacity duration-300 ${
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  loading="lazy"
+                  onLoad={handleImageLoad}
                 />
                 {/* Floating Action Buttons */}
                 <div 
-                  className={`absolute inset-0 bg-black/60 transition-opacity duration-300 flex items-center justify-center gap-2
-                    ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 'group-hover:opacity-100' : 'opacity-0'}`}
+                  className={`absolute inset-0 transition-all duration-300 flex items-center justify-center gap-2
+                    ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 
+                      'group-hover:bg-black/60' : 'bg-transparent'}`}
                 >
                   <button
                     onClick={openModal}
                     className={`p-2 bg-white text-black rounded-full transition-all duration-300 hover:bg-[#FFD700]
-                      ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 'group-hover:translate-y-0' : 'transform -translate-y-4'}`}
+                      transform opacity-0 -translate-y-4
+                      ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 
+                        'group-hover:opacity-100 group-hover:translate-y-0' : ''}`}
                     title={t('products.quickView')}
                   >
                     <FaEye className="w-4 h-4" />
@@ -74,7 +98,9 @@ export default function ProductCard({ product }) {
                   <button
                     onClick={handleWhatsAppClick}
                     className={`p-2 bg-green-600 text-white rounded-full transition-all duration-300 hover:bg-green-700
-                      ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 'group-hover:translate-y-0' : 'transform translate-y-4'}`}
+                      transform opacity-0 translate-y-4
+                      ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 
+                        'group-hover:opacity-100 group-hover:translate-y-0' : ''}`}
                     title={t('products.contact')}
                   >
                     <FaWhatsapp className="w-4 h-4" />
@@ -102,7 +128,11 @@ export default function ProductCard({ product }) {
               
               {/* Price with gradient background */}
               <div className="inline-block px-2 py-0.5 rounded-full bg-gradient-to-r from-[#FFD700]/20 to-transparent">
-                <span className="text-white text-sm font-semibold">{product.price}</span>
+                <span className="text-white text-sm font-semibold">
+                  {product.price} <span className="text-[#FFD700]">AED</span>
+                  <span className="mr-1 text-xs text-gray-400"> | </span>
+                  <span className="text-[#FFD700] text-xs">درهم اماراتي</span>
+                </span>
               </div>
 
               {/* Notes Preview */}
