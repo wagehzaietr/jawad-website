@@ -48,7 +48,10 @@ export default function ProductCard({ product }) {
         <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-black to-[#FFD700] p-[1px] cursor-pointer transition-all duration-300 hover:from-[#FFD700] hover:to-black">
           <div className="relative h-full bg-black rounded-lg overflow-hidden">
             {/* Image Container with Zoom Effect */}
-            <div className="aspect-square overflow-hidden">
+            <div 
+              className="aspect-square overflow-hidden cursor-pointer"
+              onClick={openModal}
+            >
               <div className="relative w-full h-full transform transition-transform duration-700 group-hover:scale-110">
                 <img
                   src={product.image}
