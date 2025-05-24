@@ -22,7 +22,7 @@ export default function ProductCard({ product }) {
   const handleWhatsAppClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const message = encodeURIComponent(`Hi Jawad, I'm interested in ${product.name}`);
+    const message = encodeURIComponent(`Hi, I'm interested in ${product.name}`);
     window.open(`https://wa.me/+971551358558?text=${message}`, '_blank');
   };
 
