@@ -3,13 +3,14 @@ import { useState, useEffect } from 'react';
 import { FaWhatsapp, FaEye, FaShippingFast } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import ProductModal from './ProductModal';
+import Rating from './Rating';
 import React from 'react';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onRatingChange }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTouchActive, setIsTouchActive] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const openModal = (e) => {
     e.preventDefault();
@@ -40,6 +41,12 @@ export default function ProductCard({ product }) {
 
   const handleImageLoad = () => {
     setImageLoaded(true);
+  };
+
+  const handleRatingChange = (newRating) => {
+    if (onRatingChange) {
+      onRatingChange(product.id, newRating);
+    }
   };
 
   return (
@@ -119,19 +126,19 @@ export default function ProductCard({ product }) {
                   <p className="text-xs text-gray-400">{product.tagline}</p>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-[#FFD700] text-sm mr-1">{product.rating}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#FFD700]" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
+                  <Rating
+                    initialRating={product.rating || 0}
+                    isInteractive={true}
+                    onRatingChange={handleRatingChange}
+                    size="small"
+                  />
                 </div>
               </div>
               
               {/* Price with gradient background */}
               <div className="inline-block px-2 py-0.5 rounded-full bg-gradient-to-r from-[#FFD700]/20 to-transparent">
                 <span className="text-white text-sm font-semibold">
-                  {product.price} <span className="text-[#FFD700]">AED</span>
-                  <span className="mr-1 text-xs text-gray-400"> | </span>
-                  <span className="text-[#FFD700] text-xs">درهم اماراتي</span>
+                  {product.price} <span className="text-[#FFD700]">{i18n.language === 'en' ? 'AED' : 'درهم اماراتي'}</span>
                 </span>
               </div>
 
@@ -162,6 +169,7 @@ export default function ProductCard({ product }) {
         isOpen={isModalOpen}
         onClose={closeModal}
         product={product}
+        onRatingChange={handleRatingChange}
       />
     </>
   );

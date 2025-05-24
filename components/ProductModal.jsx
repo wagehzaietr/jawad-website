@@ -2,9 +2,10 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { FaWhatsapp, FaShippingFast } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import Rating from './Rating';
 
-export default function ProductModal({ isOpen, onClose, product }) {
-  const { t } = useTranslation();
+export default function ProductModal({ isOpen, onClose, product, onRatingChange }) {
+  const { t, i18n } = useTranslation();
   const [imageLoaded, setImageLoaded] = useState(false);
 
   if (!product) {
@@ -16,6 +17,12 @@ export default function ProductModal({ isOpen, onClose, product }) {
     e.stopPropagation();
     const message = encodeURIComponent(`Hi, I'm interested in ${product.name}`);
     window.open(`https://wa.me/+971551358558?text=${message}`, '_blank');
+  };
+
+  const handleRatingChange = (newRating) => {
+    if (onRatingChange) {
+      onRatingChange(product.id, newRating);
+    }
   };
 
   const notes = product.notes || {};
@@ -88,7 +95,15 @@ export default function ProductModal({ isOpen, onClose, product }) {
                   </div>
 
                   <div className="overflow-y-auto max-h-[300px] md:max-h-[600px] pr-2">
-                    <h3 className="text-xl md:text-2xl font-serif text-[#FFD700] mb-2">{product.name}</h3>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-xl md:text-2xl font-serif text-[#FFD700]">{product.name}</h3>
+                      <Rating
+                        initialRating={product.rating}
+                        isInteractive={true}
+                        onRatingChange={handleRatingChange}
+                        size="medium"
+                      />
+                    </div>
                     <p className="text-sm md:text-base text-gray-400 mb-4">{product.description}</p>
 
                     <div className="space-y-3 md:space-y-4 mb-4 md:mb-6">
@@ -122,9 +137,7 @@ export default function ProductModal({ isOpen, onClose, product }) {
                         <div>
                           <p className="text-xs md:text-sm text-gray-400">{t('products.price')}</p>
                           <p className="text-lg md:text-xl font-semibold text-white">
-                            {product.price} <span className="text-[#FFD700]">AED</span>
-                            <span className="mx-2 text-xs md:text-sm text-gray-400">|</span>
-                            <span className="text-[#FFD700] text-xs md:text-sm">درهم اماراتي</span>
+                            {product.price} <span className="text-[#FFD700]">{i18n.language === 'en' ? 'AED' : 'درهم اماراتي'}</span>
                           </p>
                         </div>
                         <div>

@@ -30,6 +30,7 @@ const LoadingFallback = () => (
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [products, setProducts] = useState(sampleProducts);
   const { i18n, t } = useTranslation();
 
   // Handle RTL/LTR layout
@@ -38,8 +39,34 @@ export default function App() {
     document.documentElement.lang = i18n.language;
   }, [i18n.language]);
 
+  // Load saved ratings from localStorage
+  useEffect(() => {
+    const savedRatings = localStorage.getItem('productRatings');
+    if (savedRatings) {
+      const parsedRatings = JSON.parse(savedRatings);
+      setProducts(products.map(product => ({
+        ...product,
+        rating: parsedRatings[product.id] || product.rating
+      })));
+    }
+  }, []);
+
+  // Handle rating changes
+  const handleRatingChange = (productId, newRating) => {
+    // Update products state
+    const updatedProducts = products.map(product =>
+      product.id === productId ? { ...product, rating: newRating } : product
+    );
+    setProducts(updatedProducts);
+
+    // Save to localStorage
+    const savedRatings = JSON.parse(localStorage.getItem('productRatings') || '{}');
+    savedRatings[productId] = newRating;
+    localStorage.setItem('productRatings', JSON.stringify(savedRatings));
+  };
+
   // Filter by category
-  const filteredProducts = sampleProducts.filter((product) => {
+  const filteredProducts = products.filter((product) => {
     return selectedCategory === 'all' || product.category === selectedCategory;
   });
 
@@ -64,7 +91,10 @@ export default function App() {
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
               {filteredProducts.map((product) => (
                 <div key={product.id} className="transform hover:-translate-y-1 transition-transform duration-300">
-                  <ProductCard product={product} />
+                  <ProductCard 
+                    product={product}
+                    onRatingChange={handleRatingChange}
+                  />
                 </div>
               ))}
             </div>

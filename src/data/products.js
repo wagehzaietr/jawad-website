@@ -7,6 +7,7 @@ export const sampleProducts = [
     image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=400&h=400&fit=crop',
     category: 'men',
     size: '100ml',
+    rating: 4.5,
     notes: {
       top: 'Lemon, Pink Pepper, Cardamom',
       heart: 'Rose, Geranium, Vetiver',
@@ -21,6 +22,7 @@ export const sampleProducts = [
     image: 'https://images.unsplash.com/photo-1588405748880-8565e9b427ad?w=400&h=400&fit=crop',
     category: 'women',
     size: '75ml',
+    rating: 4.2,
     notes: {
       top: 'Bergamot, Lily of the Valley',
       heart: 'Damascus Rose, Jasmine, Peony',
@@ -35,6 +37,7 @@ export const sampleProducts = [
     image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=400&fit=crop',
     category: 'men',
     size: '100ml',
+    rating: 4.8,
     notes: {
       top: 'Saffron, Black Pepper',
       heart: 'Incense, Cedar',
@@ -49,6 +52,7 @@ export const sampleProducts = [
     image: 'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400&h=400&fit=crop',
     category: 'women',
     size: '90ml',
+    rating: 4.3,
     notes: {
       top: 'Sea Salt, Bergamot, Lemon',
       heart: 'Marine Accord, Jasmine, Ylang-Ylang',
