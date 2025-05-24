@@ -7,6 +7,7 @@ import React from 'react';
 
 export default function ProductCard({ product }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isTouchActive, setIsTouchActive] = useState(false);
   const { t } = useTranslation();
 
   const openModal = (e) => {
@@ -24,9 +25,25 @@ export default function ProductCard({ product }) {
     window.open(`https://wa.me/+97333445566?text=${message}`, '_blank');
   };
 
+  const handleTouchStart = (e) => {
+    e.preventDefault();
+    setIsTouchActive(true);
+  };
+
+  const handleTouchEnd = () => {
+    // Keep the touch state active for a short duration to allow button clicks
+    setTimeout(() => {
+      setIsTouchActive(false);
+    }, 300);
+  };
+
   return (
     <>
-      <div className="group relative">
+      <div 
+        className="group relative"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         {/* Card Container */}
         <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-black to-[#FFD700] p-[1px] cursor-pointer transition-all duration-300 hover:from-[#FFD700] hover:to-black">
           <div className="relative h-full bg-black rounded-lg overflow-hidden">
@@ -39,17 +56,22 @@ export default function ProductCard({ product }) {
                   className="h-full w-full object-cover object-center"
                 />
                 {/* Floating Action Buttons */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
+                <div 
+                  className={`absolute inset-0 bg-black/60 transition-opacity duration-300 flex items-center justify-center gap-2
+                    ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 'group-hover:opacity-100' : 'opacity-0'}`}
+                >
                   <button
                     onClick={openModal}
-                    className="p-2 bg-white text-black rounded-full transform -translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#FFD700]"
+                    className={`p-2 bg-white text-black rounded-full transition-all duration-300 hover:bg-[#FFD700]
+                      ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 'group-hover:translate-y-0' : 'transform -translate-y-4'}`}
                     title={t('products.quickView')}
                   >
                     <FaEye className="w-4 h-4" />
                   </button>
                   <button
                     onClick={handleWhatsAppClick}
-                    className="p-2 bg-green-600 text-white rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-green-700"
+                    className={`p-2 bg-green-600 text-white rounded-full transition-all duration-300 hover:bg-green-700
+                      ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 'group-hover:translate-y-0' : 'transform translate-y-4'}`}
                     title={t('products.contact')}
                   >
                     <FaWhatsapp className="w-4 h-4" />
