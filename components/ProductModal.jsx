@@ -52,7 +52,7 @@ export default function ProductModal({ isOpen, onClose, product }) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-lg md:max-w-2xl transform overflow-hidden rounded-2xl bg-black p-4 md:p-6 text-left align-middle shadow-xl transition-all border border-[#FFD700] will-change-transform">
+              <Dialog.Panel className="w-full max-w-lg md:max-w-2xl transform overflow-hidden rounded-2xl bg-black p-4 md:p-6 text-left align-middle shadow-xl transition-all border border-[#FFD700]">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div className="relative aspect-square">
                     <div className="w-full h-full">
@@ -85,18 +85,18 @@ export default function ProductModal({ isOpen, onClose, product }) {
                     </div>
                     <div className="absolute bottom-2 left-2 right-2 flex items-center justify-center py-1.5 px-3 bg-black/80 backdrop-blur-sm rounded-lg">
                       <FaShippingFast className="w-4 h-4 text-[#FFD700] mr-2" />
-                      <span className="text-xs md:text-sm text-white">{t('products.freeShipping', 'Free Shipping')} - {t('products.freeShippingAr', 'شحن مجاني')}</span>
+                      <span className="text-xs md:text-sm text-white">{t('products.freeShipping')} - {t('products.freeShippingAr')}</span>
                     </div>
                   </div>
 
-                  <div className="overflow-y-auto max-h-[300px] md:max-h-[600px] pr-2 overscroll-contain">
+                  <div className="overflow-y-auto max-h-[300px] md:max-h-[600px] pr-2 overscroll-contain custom-scrollbar">
                     <h3 className="text-xl md:text-2xl font-serif text-[#FFD700] mb-2">{product.name}</h3>
                     <p className="text-sm md:text-base text-gray-400 mb-4">{product.description}</p>
 
                     <div className="space-y-3 md:space-y-4 mb-4 md:mb-6">
                       <div className="space-y-2 md:space-y-3">
                         <h4 className="text-base md:text-lg font-semibold text-[#FFD700] border-b border-gray-800 pb-2">
-                          {t('products.notes.title', 'Fragrance Notes')}
+                          {t('products.notes.title')}
                         </h4>
                         {notes.top && (
                           <div>
@@ -137,10 +137,10 @@ export default function ProductModal({ isOpen, onClose, product }) {
 
                       <button
                         onClick={handleWhatsAppClick}
-                        className="w-full py-2 md:py-3 px-3 md:px-4 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg flex items-center justify-center gap-2 hover:from-green-700 hover:to-green-800 transition-colors transform active:scale-[0.98] shadow-lg hover:shadow-green-600/20"
+                        className="w-full py-2.5 px-4 bg-green-600/90 text-white/90 rounded-lg flex items-center justify-center gap-2.5 hover:bg-green-700 transition-all duration-200 transform active:scale-[0.98] outline-none ring-0 focus:ring-0"
                       >
-                        <FaWhatsapp className="w-4 h-4 md:w-[18px] md:h-[18px]" />
-                        <span className="text-sm md:text-base font-medium">{t('products.contact')}</span>
+                        <FaWhatsapp className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                        <span className="text-sm font-medium tracking-wide">{t('products.contact')}</span>
                       </button>
                     </div>
                   </div>

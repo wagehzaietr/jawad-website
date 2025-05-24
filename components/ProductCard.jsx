@@ -50,7 +50,7 @@ export default function ProductCard({ product }) {
         onTouchEnd={handleTouchEnd}
       >
         {/* Card Container */}
-        <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-black to-[#FFD700] p-[1px] cursor-pointer transition-all duration-300 hover:from-[#FFD700] hover:to-black">
+        <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-black to-[#FFD700] p-[1px] cursor-pointer transition-all duration-300 hover:from-[#FFD700] hover:to-black animate-shimmer">
           <div className="relative h-full bg-black rounded-lg overflow-hidden">
             {/* Image Container with Zoom Effect */}
             <div 
@@ -73,8 +73,8 @@ export default function ProductCard({ product }) {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className={`h-full w-full object-cover object-center transition-opacity duration-300 ${
-                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  className={`h-full w-full object-cover object-center transition-all duration-300 ${
+                    imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
                   }`}
                   loading="lazy"
                   onLoad={handleImageLoad}
@@ -88,7 +88,7 @@ export default function ProductCard({ product }) {
                   <button
                     onClick={openModal}
                     className={`p-2 bg-white text-black rounded-full transition-all duration-300 hover:bg-[#FFD700]
-                      transform opacity-0
+                      transform opacity-0 hover:scale-110
                       ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 
                         'group-hover:opacity-100 group-hover:translate-y-0' : ''}`}
                     title={t('products.quickView')}
@@ -98,7 +98,7 @@ export default function ProductCard({ product }) {
                   <button
                     onClick={handleWhatsAppClick}
                     className={`p-2 bg-green-600 text-white rounded-full transition-all duration-300 hover:bg-green-700
-                      transform opacity-0 translate-y-4 hidden md:block
+                      transform opacity-0 translate-y-4 hidden md:block hover:scale-110
                       ${isTouchActive || window.matchMedia('(hover: hover)').matches ? 
                         'group-hover:opacity-100 group-hover:translate-y-0' : ''}`}
                     title={t('products.contact')}
@@ -127,7 +127,7 @@ export default function ProductCard({ product }) {
               </div>
               
               {/* Price with gradient background */}
-              <div className="inline-block px-2 py-0.5 rounded-full bg-gradient-to-r from-[#FFD700]/20 to-transparent">
+              <div className="inline-block px-2 py-0.5 rounded-full bg-gradient-to-r from-[#FFD700]/20 to-transparent backdrop-blur-sm">
                 <span className="text-white text-sm font-semibold">
                   {product.price} <span className="text-[#FFD700]">AED</span>
                   <span className="mr-1 text-xs text-gray-400"> | </span>
@@ -143,7 +143,7 @@ export default function ProductCard({ product }) {
               </div>
 
               {/* Free Shipping Badge */}
-              <div className="flex items-center justify-center mt-2 py-1.5 bg-gradient-to-r from-[#FFD700]/10 to-transparent rounded-lg">
+              <div className="flex items-center justify-center mt-2 py-1.5 bg-gradient-to-r from-[#FFD700]/10 to-transparent rounded-lg backdrop-blur-sm">
                 <FaShippingFast className="w-4 h-4 text-[#FFD700] mr-2" />
                 <span className="text-xs text-gray-300">{t('products.freeShipping', 'Free Shipping')}</span>
               </div>
