@@ -83,7 +83,7 @@ export default function Header({ activeSection, setActiveSection }) {
         >
           <img 
             src={logo} 
-            alt="M&J Almahairy" 
+            alt="M&J Almahairi" 
             className="h-12 w-auto"
           />
         </div>
