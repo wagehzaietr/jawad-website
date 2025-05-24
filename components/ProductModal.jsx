@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import { FaWhatsapp, FaTimes, FaShippingFast } from 'react-icons/fa';
+import { FaWhatsapp, FaShippingFast } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 export default function ProductModal({ isOpen, onClose, product }) {
@@ -47,16 +47,6 @@ export default function ProductModal({ isOpen, onClose, product }) {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-lg md:max-w-2xl transform overflow-hidden rounded-2xl bg-black p-4 md:p-6 text-left align-middle shadow-xl transition-all border border-[#FFD700]">
-                <div className="absolute top-2 right-2 md:top-3 md:right-3">
-                  <button
-                    onClick={onClose}
-                    className="text-gray-400 hover:text-white transition-colors p-2"
-                    aria-label="Close modal"
-                  >
-                    <FaTimes className="w-4 h-4" />
-                  </button>
-                </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div className="relative aspect-square">
                     <div className="w-full h-full">
