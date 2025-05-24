@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useCallback } from 'react';
 import { FaWhatsapp, FaShippingFast } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
@@ -11,12 +11,18 @@ export default function ProductModal({ isOpen, onClose, product }) {
     return null;
   }
 
-  const handleWhatsAppClick = (e) => {
+  const handleWhatsAppClick = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
     const message = encodeURIComponent(`Hi Jawad, I'm interested in ${product.name}`);
     window.open(`https://wa.me/+97333445566?text=${message}`, '_blank');
-  };
+  }, [product.name]);
+
+  const handleImageClick = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onClose();
+  }, [onClose]);
 
   const notes = product.notes || {};
 
@@ -25,10 +31,10 @@ export default function ProductModal({ isOpen, onClose, product }) {
       <Dialog as="div" className="relative z-50" onClose={onClose}>
         <Transition.Child
           as={Fragment}
-          enter="ease-out duration-300"
+          enter="ease-out duration-200"
           enterFrom="opacity-0"
           enterTo="opacity-100"
-          leave="ease-in duration-200"
+          leave="ease-in duration-150"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
@@ -39,20 +45,20 @@ export default function ProductModal({ isOpen, onClose, product }) {
           <div className="flex min-h-full items-center justify-center p-4 text-center">
             <Transition.Child
               as={Fragment}
-              enter="ease-out duration-300"
+              enter="ease-out duration-200"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
+              leave="ease-in duration-150"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-lg md:max-w-2xl transform overflow-hidden rounded-2xl bg-black p-4 md:p-6 text-left align-middle shadow-xl transition-all border border-[#FFD700]">
+              <Dialog.Panel className="w-full max-w-lg md:max-w-2xl transform overflow-hidden rounded-2xl bg-black p-4 md:p-6 text-left align-middle shadow-xl transition-all border border-[#FFD700] will-change-transform">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div className="relative aspect-square">
                     <div className="w-full h-full">
                       {/* Blur placeholder */}
                       <div 
-                        className={`absolute inset-0 bg-gray-900 transition-opacity duration-300 ${
+                        className={`absolute inset-0 bg-gray-900 transition-opacity duration-200 ${
                           imageLoaded ? 'opacity-0' : 'opacity-100'
                         }`}
                         style={{
@@ -63,17 +69,13 @@ export default function ProductModal({ isOpen, onClose, product }) {
                         }}
                       />
                       <div 
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          onClose();
-                        }}
+                        onClick={handleImageClick}
                         className="relative w-full h-full cursor-pointer"
                       >
                         <img
                           src={product.image}
                           alt={product.name}
-                          className={`w-full h-full object-cover rounded-lg transition-opacity duration-300 ${
+                          className={`w-full h-full object-cover rounded-lg transition-opacity duration-200 ${
                             imageLoaded ? 'opacity-100' : 'opacity-0'
                           }`}
                           loading="lazy"
@@ -87,7 +89,7 @@ export default function ProductModal({ isOpen, onClose, product }) {
                     </div>
                   </div>
 
-                  <div className="overflow-y-auto max-h-[300px] md:max-h-[600px] pr-2">
+                  <div className="overflow-y-auto max-h-[300px] md:max-h-[600px] pr-2 overscroll-contain">
                     <h3 className="text-xl md:text-2xl font-serif text-[#FFD700] mb-2">{product.name}</h3>
                     <p className="text-sm md:text-base text-gray-400 mb-4">{product.description}</p>
 
@@ -135,10 +137,10 @@ export default function ProductModal({ isOpen, onClose, product }) {
 
                       <button
                         onClick={handleWhatsAppClick}
-                        className="w-full py-2.5 md:py-3 px-4 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg flex items-center justify-center space-x-2 hover:from-green-700 hover:to-green-800 transition-colors"
+                        className="w-full py-2 md:py-3 px-3 md:px-4 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg flex items-center justify-center gap-2 hover:from-green-700 hover:to-green-800 transition-colors transform active:scale-[0.98] shadow-lg hover:shadow-green-600/20"
                       >
-                        <FaWhatsapp size={18} />
-                        <span className="text-sm md:text-base">{t('products.contact')}</span>
+                        <FaWhatsapp className="w-4 h-4 md:w-[18px] md:h-[18px]" />
+                        <span className="text-sm md:text-base font-medium">{t('products.contact')}</span>
                       </button>
                     </div>
                   </div>
