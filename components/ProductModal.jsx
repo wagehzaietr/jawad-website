@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState, useCallback } from 'react';
+import { Fragment, useState } from 'react';
 import { FaWhatsapp, FaShippingFast } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
@@ -11,18 +11,12 @@ export default function ProductModal({ isOpen, onClose, product }) {
     return null;
   }
 
-  const handleWhatsAppClick = useCallback((e) => {
+  const handleWhatsAppClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
     const message = encodeURIComponent(`Hi Jawad, I'm interested in ${product.name}`);
-    window.open(`https://wa.me/+97333445566?text=${message}`, '_blank');
-  }, [product.name]);
-
-  const handleImageClick = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onClose();
-  }, [onClose]);
+    window.open(`https://wa.me/+971551358558?text=${message}`, '_blank');
+  };
 
   const notes = product.notes || {};
 
@@ -31,10 +25,10 @@ export default function ProductModal({ isOpen, onClose, product }) {
       <Dialog as="div" className="relative z-50" onClose={onClose}>
         <Transition.Child
           as={Fragment}
-          enter="ease-out duration-200"
+          enter="ease-out duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"
-          leave="ease-in duration-150"
+          leave="ease-in duration-200"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
@@ -45,10 +39,10 @@ export default function ProductModal({ isOpen, onClose, product }) {
           <div className="flex min-h-full items-center justify-center p-4 text-center">
             <Transition.Child
               as={Fragment}
-              enter="ease-out duration-200"
+              enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
-              leave="ease-in duration-150"
+              leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
@@ -58,7 +52,7 @@ export default function ProductModal({ isOpen, onClose, product }) {
                     <div className="w-full h-full">
                       {/* Blur placeholder */}
                       <div 
-                        className={`absolute inset-0 bg-gray-900 transition-opacity duration-200 ${
+                        className={`absolute inset-0 bg-gray-900 transition-opacity duration-300 ${
                           imageLoaded ? 'opacity-0' : 'opacity-100'
                         }`}
                         style={{
@@ -69,13 +63,17 @@ export default function ProductModal({ isOpen, onClose, product }) {
                         }}
                       />
                       <div 
-                        onClick={handleImageClick}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          onClose();
+                        }}
                         className="relative w-full h-full cursor-pointer"
                       >
                         <img
                           src={product.image}
                           alt={product.name}
-                          className={`w-full h-full object-cover rounded-lg transition-opacity duration-200 ${
+                          className={`w-full h-full object-cover rounded-lg transition-opacity duration-300 ${
                             imageLoaded ? 'opacity-100' : 'opacity-0'
                           }`}
                           loading="lazy"
@@ -85,18 +83,18 @@ export default function ProductModal({ isOpen, onClose, product }) {
                     </div>
                     <div className="absolute bottom-2 left-2 right-2 flex items-center justify-center py-1.5 px-3 bg-black/80 backdrop-blur-sm rounded-lg">
                       <FaShippingFast className="w-4 h-4 text-[#FFD700] mr-2" />
-                      <span className="text-xs md:text-sm text-white">{t('products.freeShipping')} - {t('products.freeShippingAr')}</span>
+                      <span className="text-xs md:text-sm text-white">{t('products.freeShipping', 'Free Shipping')} - {t('products.freeShippingAr', 'شحن مجاني')}</span>
                     </div>
                   </div>
 
-                  <div className="overflow-y-auto max-h-[300px] md:max-h-[600px] pr-2 overscroll-contain custom-scrollbar">
+                  <div className="overflow-y-auto max-h-[300px] md:max-h-[600px] pr-2">
                     <h3 className="text-xl md:text-2xl font-serif text-[#FFD700] mb-2">{product.name}</h3>
                     <p className="text-sm md:text-base text-gray-400 mb-4">{product.description}</p>
 
                     <div className="space-y-3 md:space-y-4 mb-4 md:mb-6">
                       <div className="space-y-2 md:space-y-3">
                         <h4 className="text-base md:text-lg font-semibold text-[#FFD700] border-b border-gray-800 pb-2">
-                          {t('products.notes.title')}
+                          {t('products.notes.title', 'Fragrance Notes')}
                         </h4>
                         {notes.top && (
                           <div>
@@ -137,10 +135,10 @@ export default function ProductModal({ isOpen, onClose, product }) {
 
                       <button
                         onClick={handleWhatsAppClick}
-                        className="w-full py-2.5 px-4 bg-green-600/90 text-white/90 rounded-lg flex items-center justify-center gap-2.5 hover:bg-green-700 transition-all duration-200 transform active:scale-[0.98] outline-none ring-0 focus:ring-0"
+                        className="w-full py-2.5 md:py-3 px-4 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg flex items-center justify-center space-x-2 hover:from-green-700 hover:to-green-800 transition-colors"
                       >
-                        <FaWhatsapp className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                        <span className="text-sm font-medium tracking-wide">{t('products.contact')}</span>
+                        <FaWhatsapp size={18} />
+                        <span className="text-sm md:text-base">{t('products.contact')}</span>
                       </button>
                     </div>
                   </div>

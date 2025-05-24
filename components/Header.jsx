@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
 import React from 'react';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo3.png';
 
 export default function Header({ activeSection, setActiveSection }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

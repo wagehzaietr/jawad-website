@@ -1,6 +1,7 @@
 // Hero.jsx
 import { useTranslation } from 'react-i18next';
 import React from 'react';
+import heroImage from '../assets/hero.jpg';
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -18,7 +19,7 @@ export default function Hero() {
       <div 
         className="absolute inset-0 w-full h-full"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=1600&auto=format&fit=crop&q=80")',
+          backgroundImage: `url(${heroImage})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat'

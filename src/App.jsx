@@ -6,6 +6,7 @@ import Hero from '../components/Hero';
 import ProductFilter from '../components/ProductFilter';
 import ProductCard from '../components/ProductCard';
 import ScrollToTop from '../components/ScrollToTop';
+import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import React from 'react';
 import './i18n/config';
 import { sampleProducts } from './data/products';
@@ -85,6 +86,7 @@ export default function App() {
         <Footer />
       </Suspense>
       <ScrollToTop />
+      <FloatingWhatsApp />
     </div>
   );
 }
