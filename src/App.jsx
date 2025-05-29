@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
@@ -31,7 +31,10 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [products, setProducts] = useState(sampleProducts);
+  const [visibleCount, setVisibleCount] = useState(2);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const { i18n, t } = useTranslation();
+  const containerRef = useRef(null);
 
   // Handle RTL/LTR layout
   useEffect(() => {
@@ -70,6 +73,32 @@ export default function App() {
     return selectedCategory === 'all' || product.category === selectedCategory;
   });
 
+  // Reset visibleCount when category changes
+  useEffect(() => {
+    setVisibleCount(2);
+  }, [selectedCategory]);
+
+  // Infinite scroll handler
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isLoadingMore) return;
+      const grid = containerRef.current;
+      if (!grid) return;
+      const rect = grid.getBoundingClientRect();
+      if (rect.bottom <= window.innerHeight + 100) {
+        if (visibleCount < filteredProducts.length) {
+          setIsLoadingMore(true);
+          setTimeout(() => {
+            setVisibleCount((prev) => Math.min(prev + 2, filteredProducts.length));
+            setIsLoadingMore(false);
+          }, 600); // Simulate loading
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [visibleCount, filteredProducts.length, isLoadingMore]);
+
   return (
     <div className={`min-h-screen bg-black text-white font-sans ${i18n.language === 'ar' ? 'font-arabic' : ''}`}>
       <Header
@@ -87,9 +116,8 @@ export default function App() {
               {t('products.description')}
             </p>
             <ProductFilter selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
-            
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
-              {filteredProducts.map((product) => (
+            <div ref={containerRef} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
+              {filteredProducts.slice(0, visibleCount).map((product) => (
                 <div key={product.id} className="transform hover:-translate-y-1 transition-transform duration-300">
                   <ProductCard 
                     product={product}
@@ -98,6 +126,23 @@ export default function App() {
                 </div>
               ))}
             </div>
+            {isLoadingMore && <LoadingFallback />}
+            {visibleCount < filteredProducts.length && !isLoadingMore && (
+              <div className="flex justify-center mt-6">
+                <button
+                  onClick={() => {
+                    setIsLoadingMore(true);
+                    setTimeout(() => {
+                      setVisibleCount((prev) => Math.min(prev + 2, filteredProducts.length));
+                      setIsLoadingMore(false);
+                    }, 600);
+                  }}
+                  className="px-6 py-2 bg-[#FFD700] text-black rounded-full font-semibold hover:bg-[#B8860B] transition-all"
+                >
+                  {t('hero.cta', 'Show More')}
+                </button>
+              </div>
+            )}
           </div>
         </section>
         <Suspense fallback={<LoadingFallback />}>
