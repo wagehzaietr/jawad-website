@@ -26,7 +26,7 @@ export default function Rating({ initialRating = 0, totalStars = 5, isInteractiv
   };
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-0.5 sm:gap-1">
       {[...Array(totalStars)].map((_, index) => {
         const ratingValue = index + 1;
         return (
@@ -36,12 +36,12 @@ export default function Rating({ initialRating = 0, totalStars = 5, isInteractiv
             onClick={() => handleRatingClick(ratingValue)}
             onMouseEnter={() => isInteractive && setHover(ratingValue)}
             onMouseLeave={() => isInteractive && setHover(null)}
-            className={`${isInteractive ? 'cursor-pointer' : 'cursor-default'} transition-colors duration-200`}
+            className={`${isInteractive ? 'cursor-pointer' : 'cursor-default'} transition-colors duration-200 p-0.5 sm:p-0`}
             disabled={!isInteractive}
             aria-label={`Rate ${ratingValue} out of ${totalStars} stars`}
           >
             <FaStar
-              className={`${starSizes[size]} ${
+              className={`${starSizes[size]} sm:${starSizes[size]} ${
                 ratingValue <= (hover || rating)
                   ? 'text-[#FFD700]'
                   : 'text-gray-600'
@@ -50,11 +50,9 @@ export default function Rating({ initialRating = 0, totalStars = 5, isInteractiv
           </button>
         );
       })}
-      {isInteractive && (
-        <span className="text-xs text-gray-400 ml-1">
-          ({rating.toFixed(1)})
-        </span>
-      )}
+      <span className="text-[10px] sm:text-xs text-gray-400 ml-1 min-w-[24px] text-center">
+        {rating.toFixed(1)}
+      </span>
     </div>
   );
 } 
