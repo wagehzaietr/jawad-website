@@ -21,6 +21,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   </head>
   <body>
+    <div id="global-loader" style="position:fixed;z-index:9999;inset:0;display:flex;align-items:center;justify-content:center;background:#000;">
+      <div style="width:80px;height:80px;position:relative;">
+        <div style="position:absolute;inset:0;border:8px solid #FFD70033;border-radius:50%;"></div>
+        <div style="position:absolute;inset:0;border:8px solid #FFD700;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></div>
+      </div>
+      <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+      </style>
+    </div>
     <div id="root"></div>
     <div id="modal-root"></div>
     <script type="module" src="/src/main.jsx"></script>

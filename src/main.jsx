@@ -9,3 +9,7 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
+
+// Remove global loader after React mounts
+const loader = document.getElementById('global-loader');
+if (loader) loader.remove();
