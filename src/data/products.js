@@ -2,6 +2,7 @@ export const sampleProducts = [
   {
     id: 1,
     name: 'Legend royal',
+    name_en: 'Legend Royal',
     description: 'A luxurious blend of rare oud and royal spices',
     price: 299.99,
     image: 'https://klxblzcaxgybbogvfcps.supabase.co/storage/v1/object/public/fragrances//photo_5893309955136669285_y.jpg',
@@ -10,13 +11,17 @@ export const sampleProducts = [
     rating: 4.5,
     notes: {
       top: 'المكونات العليا: أوراق البنفسج، البرغموت',
+      top_en: 'Top Notes: Violet Leaves, Bergamot',
       heart: 'المكونات الوسطى: نفحات خشبية، الياسمين، الماغنوليا',
-      base: 'المكونات الأساسية: طحلب السنديان، الجلود.'
+      heart_en: 'Heart Notes: Woody Accords, Jasmine, Magnolia',
+      base: 'المكونات الأساسية: طحلب السنديان، الجلود.',
+      base_en: 'Base Notes: Oakmoss, Leathers.'
   }
   },
   {
     id: 2,
     name: 'انا وحكايتي',
+    name_en: 'Me and My Story',
     description: 'Delicate rose petals with hints of jasmine',
     price: 249.99,
     image: 'https://klxblzcaxgybbogvfcps.supabase.co/storage/v1/object/public/fragrances//photo_5893309955136669284_y.jpg',
@@ -25,13 +30,17 @@ export const sampleProducts = [
     rating: 4.2,
     notes: {
       top: 'المكونات العليا: دافانا، برغموت إيطالي، فلفل وردي',
+      top_en: 'Top Notes: Davana, Italian Bergamot, Pink Pepper',
       heart: 'المكونات الوسطى: عنبر أبيض، روزماري أفريقي، عود',
-      base: 'المكونات الوسطى: عنبر أبيض، روزماري أفريقي، عود'
+      heart_en: 'Heart Notes: White Amber, African Rosemary, Oud',
+      base: 'المكونات الوسطى: عنبر أبيض، روزماري أفريقي، عود',
+      base_en: 'Base Notes: White Amber, African Rosemary, Oud'
     }
   },
   {
     id: 3,
     name: 'Baccarat Rouge Mirage',
+    name_en: 'Baccarat Rouge Mirage',
     description: 'Mysterious blend of oriental spices and amber',
     price: 199.99,
     image: 'https://klxblzcaxgybbogvfcps.supabase.co/storage/v1/object/public/fragrances//photo_5893309955136669286_y.jpg',
@@ -40,13 +49,17 @@ export const sampleProducts = [
     rating: 4.8,
     notes: {
       top: 'المكونات العليا: الزعفران، الياسمين',
+      top_en: 'Top Notes: Saffron, Jasmine',
       heart: 'المكونات الوسطى: خشب العنبر.',
-      base: 'المكونات الأساسية: خشب الأرز، صمغ التنوب'
+      heart_en: 'Heart Notes: Amber Wood',
+      base: 'المكونات الأساسية: خشب الأرز، صمغ التنوب',
+      base_en: 'Base Notes: Cedarwood, Fir Balsam'
     }
   },
   {
     id: 4,
     name: 'Stronger you Edge',
+    name_en: 'Stronger You Edge',
     description: 'Fresh aquatic notes with citrus undertones',
     price: 179.99,
     image: 'https://klxblzcaxgybbogvfcps.supabase.co/storage/v1/object/public/fragrances//photo_5893309955136669287_y.jpg',
@@ -55,13 +68,17 @@ export const sampleProducts = [
     rating: 4.3,
     notes: {
       top: 'الهيل, النعناع , الفلفل الوردي, أوراق البنفسج ',
+      top_en: 'Top Notes: Cardamom, Mint, Pink Pepper, Violet Leaves',
       heart: 'الأناناس , القرفة , الشمام , الميرامية , الخزامى',
-      base: 'المكونات الأساسية: المسك الأبيض، خشب الأرز، العنبر'
+      heart_en: 'Heart Notes: Pineapple, Cinnamon, Melon, Sage, Lavender',
+      base: 'المكونات الأساسية: المسك الأبيض، خشب الأرز، العنبر',
+      base_en: 'Base Notes: White Musk, Cedarwood, Amber'
     }
   },
   {
     id: 5,
     name: 'Accento de Lune',
+    name_en: 'Accento de Lune',
     description: 'Warm amber and vanilla with a hint of spice',
     price: 189.99,
     image: 'https://klxblzcaxgybbogvfcps.supabase.co/storage/v1/object/public/fragrances//photo_5893309955136669288_y.jpg',
@@ -70,13 +87,17 @@ export const sampleProducts = [
     rating: 4.6,
     notes: {
       top: 'المكونات العليا: الأناناس المنعش، نفحات الحمضيات، الفلفل الوردي',
+      top_en: 'Top Notes: Refreshing Pineapple, Citrus Accords, Pink Pepper',
       heart: 'المكونات الوسطى: الياسمين، الخزامي',
-      base: 'المكونات الأساسية: السوسن'
+      heart_en: 'Heart Notes: Jasmine, Lavender',
+      base: 'المكونات الأساسية: السوسن',
+      base_en: 'Base Notes: Orris'
     }
   },
   {
     id: 6,
     name: 'Silver Secnt Sky',
+    name_en: 'Silver Scent Sky',
     description: 'Rich oud with smoky leather and spices',
     price: 349.99,
     image: 'https://klxblzcaxgybbogvfcps.supabase.co/storage/v1/object/public/fragrances//photo_5893309955136669289_y.jpg',
@@ -85,8 +106,11 @@ export const sampleProducts = [
     rating: 4.7,
     notes: {
       top: 'المكونات العليا: زهر البرتقال، الليمون.',
+      top_en: 'Top Notes: Orange Blossom, Lemon',
       heart: 'المكونات الوسطى: الخزامي، جوزة الطيب، الكزبرة، إبرة الراعي، إكليل الجبل، الهيل.',
-      base: 'المكونات الأساسية: الليتشي، التونكا، خشب الساج، نجيل الهند.'
+      heart_en: 'Heart Notes: Lavender, Nutmeg, Coriander, Geranium, Rosemary, Cardamom',
+      base: 'المكونات الأساسية: الليتشي، التونكا، خشب الساج، نجيل الهند.',
+      base_en: 'Base Notes: Lychee, Tonka Bean, Teakwood, Vetiver'
     }
   },
   {

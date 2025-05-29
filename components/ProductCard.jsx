@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { FaWhatsapp, FaEye, FaShippingFast } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import ProductModal from './ProductModal';
+import ProductModal from '../components/ProductModal'
 import Rating from './Rating';
 import React from 'react';
 
@@ -121,7 +121,7 @@ export default function ProductCard({ product, onRatingChange }) {
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="text-base font-serif text-[#FFD700] group-hover:text-white transition-colors duration-300">
-                    {product.name}
+                    {i18n.language === 'en' ? (product.name_en || product.name) : product.name}
                   </h3>
                   <p className="text-xs text-gray-400">{product.tagline}</p>
                 </div>
@@ -145,7 +145,7 @@ export default function ProductCard({ product, onRatingChange }) {
               {/* Notes Preview */}
               <div className="pt-1 border-t border-gray-800">
                 <p className="text-xs text-gray-400 line-clamp-1">
-                  {t('products.notes.top')}: {product.notes?.top}
+                  {t('products.notes.top')}: {i18n.language === 'en' ? (product.notes?.top_en || product.notes?.top) : product.notes?.top}
                 </p>
               </div>
 

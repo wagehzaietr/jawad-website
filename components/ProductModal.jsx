@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { FaWhatsapp, FaShippingFast } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import Rating from './Rating';
+import Rating from '../components/Rating';
 
 export default function ProductModal({ isOpen, onClose, product, onRatingChange }) {
   const { t, i18n } = useTranslation();
@@ -96,7 +96,7 @@ export default function ProductModal({ isOpen, onClose, product, onRatingChange 
 
                   <div className="overflow-y-auto max-h-[300px] md:max-h-[600px] pr-2">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl md:text-2xl font-serif text-[#FFD700]">{product.name}</h3>
+                      <h3 className="text-xl md:text-2xl font-serif text-[#FFD700]">{i18n.language === 'en' ? (product.name_en || product.name) : product.name}</h3>
                       <Rating
                         initialRating={product.rating}
                         isInteractive={true}
@@ -114,19 +114,19 @@ export default function ProductModal({ isOpen, onClose, product, onRatingChange 
                         {notes.top && (
                           <div>
                             <h5 className="text-sm font-semibold text-[#FFD700]">{t('products.notes.top')}</h5>
-                            <p className="text-xs md:text-sm text-gray-400">{notes.top}</p>
+                            <p className="text-xs md:text-sm text-gray-400">{i18n.language === 'en' ? (notes.top_en || notes.top) : notes.top}</p>
                           </div>
                         )}
                         {notes.heart && (
                           <div>
                             <h5 className="text-sm font-semibold text-[#FFD700]">{t('products.notes.heart')}</h5>
-                            <p className="text-xs md:text-sm text-gray-400">{notes.heart}</p>
+                            <p className="text-xs md:text-sm text-gray-400">{i18n.language === 'en' ? (notes.heart_en || notes.heart) : notes.heart}</p>
                           </div>
                         )}
                         {notes.base && (
                           <div>
                             <h5 className="text-sm font-semibold text-[#FFD700]">{t('products.notes.base')}</h5>
-                            <p className="text-xs md:text-sm text-gray-400">{notes.base}</p>
+                            <p className="text-xs md:text-sm text-gray-400">{i18n.language === 'en' ? (notes.base_en || notes.base) : notes.base}</p>
                           </div>
                         )}
                       </div>
