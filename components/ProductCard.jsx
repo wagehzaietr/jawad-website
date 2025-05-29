@@ -125,14 +125,6 @@ export default function ProductCard({ product, onRatingChange }) {
                   </h3>
                   <p className="text-xs text-gray-400">{product.tagline}</p>
                 </div>
-                <div className="flex items-center">
-                  <Rating
-                    initialRating={product.rating || 0}
-                    isInteractive={true}
-                    onRatingChange={handleRatingChange}
-                    size="small"
-                  />
-                </div>
               </div>
               
               {/* Price with gradient background */}
