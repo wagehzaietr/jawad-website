@@ -1,5 +1,15 @@
 export const sampleProducts = [
   {
+    id: 0,
+    name: 'عود M&J',
+    name_en: 'EAU DE BARFUME',
+    description: 'A classic black fragrance with a hint of spice',
+    price: 250,
+    size: '100ml',
+    image: 'https://klxblzcaxgybbogvfcps.supabase.co/storage/v1/object/public/fragrances/new-4.jpg',
+
+  },
+  {
     id: 1,
     name: 'Legend royal',
     name_en: 'Legend Royal',
@@ -216,6 +226,53 @@ export const sampleProducts = [
       top: 'المكونات العليا: البرتقال الصقلي، البرغموت الكالابري، الليمون الصقلي.',
       heart: 'المكونات الوسطى: سلة فواكه البحر الأبيض المتوسط (مزيج الفواكه).',
       base: 'المكونات الأساسية: المسك الأبيض، فانيليا مدغشقر، العنبر.'
-    }
+    },
   }
 ]
+
+export const newestProducts = [
+  {
+    id: 101,
+    name: 'Midnight Oud',
+    name_en: 'Midnight Oud',
+    description: 'Exquisite oud with midnight mystery',
+    price: 55,
+    image: 'https://klxblzcaxgybbogvfcps.supabase.co/storage/v1/object/public/fragrances/new-1.jpg',
+    category: 'unisex',
+    size: '50ml',
+    rating: 4.9
+  },
+  {
+    id: 102,
+    name: 'Rose Velvet',
+    name_en: 'Rose Velvet',
+    description: 'Luxurious rose with velvet touch',
+    price: 50,
+    image: 'https://klxblzcaxgybbogvfcps.supabase.co/storage/v1/object/public/fragrances/new-5.jpg',
+    category: 'women',
+    size: '50ml',
+    rating: 4.8
+  },
+  {
+    id: 103,
+    name: 'Ocean Breeze',
+    name_en: 'Ocean Breeze',
+    description: 'Refreshing ocean scent with breeze',
+    price: 45,
+    image: 'https://klxblzcaxgybbogvfcps.supabase.co/storage/v1/object/public/fragrances/new-3.jpg',
+    category: 'men',
+    size: '50ml',
+    rating: 4.7
+  },
+  {
+    id: 104,
+    name: 'Citrus Dream',
+    name_en: 'Citrus Dream',
+    description: 'Vibrant citrus blend with dreamy notes',
+    price: 40,
+    image: 'https://klxblzcaxgybbogvfcps.supabase.co/storage/v1/object/public/fragrances/new-2.jpg',
+    category: 'unisex',
+    size: '50ml',
+    rating: 4.6
+  }
+];

@@ -13,6 +13,8 @@
   },
   "products": {
     "title": "Best Selling Perfumes",
+    "newestTitle": "Our Newest Products",
+    "newestDescription": "Discover our latest additions to the collection",
     "description": "Choose your category below to explore our finest scents.",
     "categories": {
       "all": "All",
@@ -47,4 +49,4 @@
     "messageBtn": "Message on WhatsApp",
     "locations": "Dubai, Sharjah, Abu Dhabi & Ajman"
   }
-} 
+}

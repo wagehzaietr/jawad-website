@@ -9,7 +9,7 @@ import ScrollToTop from '../components/ScrollToTop';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import React from 'react';
 import './i18n/config';
-import { sampleProducts } from './data/products';
+import { sampleProducts, newestProducts } from './data/products';
 
 // Lazy load components that are not immediately visible
 const About = lazy(() => import('../components/About'));
@@ -111,6 +111,46 @@ export default function App() {
         </section>
         <section id="products" className="py-16 px-4 bg-black">
           <div className="container mx-auto">
+            {/* Our Newest Products Section - Creative Showcase */}
+            <div className="mb-16">
+              <h2 className="text-3xl font-serif text-center mb-10 text-[#FFD700] relative">
+                {t('products.newestTitle', 'Our Newest Products')}
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-0.5 bg-gradient-to-r from-transparent via-[#FFD700] to-transparent"></div>
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-4xl mx-auto">
+                {newestProducts.map((product, index) => (
+                  <div 
+                    key={product.id} 
+                    className="group relative overflow-hidden rounded-xl transition-all duration-500"
+                  >
+                    <div className="aspect-square overflow-hidden rounded-xl relative">
+                      {/* Golden glow effect on hover */}
+                      <div className="absolute inset-0 rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.2)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      
+                      {/* Image with creative overlay */}
+                      <div className="relative w-full h-full transform transition-transform duration-700 group-hover:scale-105">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="h-full w-full object-cover object-center"
+                          loading="lazy"
+                        />
+                        
+                        {/* Subtle vignette effect */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                      </div>
+                      
+                      {/* Floating reflection effect */}
+                      <div className="absolute inset-0 rounded-xl pointer-events-none">
+                        <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Existing Products Section */}
             <h2 className="text-3xl font-serif text-center mb-4 text-[#FFD700]">{t('products.title')}</h2>
             <p className="text-center text-gray-400 mb-8 max-w-xl mx-auto">
               {t('products.description')}
